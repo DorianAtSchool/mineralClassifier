@@ -1,17 +1,10 @@
-
 import os
-
 import numpy as np
-
-
 import cv2
 import keras
-
-
 from flask import Flask, render_template, request
 import cv2
 import numpy as np
-
 from werkzeug.utils import secure_filename
 
 
@@ -45,7 +38,6 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
 def modelPrediction(filename): 
 
     class_dict = {0: 'biotite',
@@ -65,11 +57,6 @@ def modelPrediction(filename):
     probs = model.predict(test_image)
     pred_class = np.argmax(probs)
     pred_class = class_dict[pred_class]
-    print(pred_class)
     return pred_class
-    #img = cv2.imread(file_path)
-    #img = cv2.putText(img, pred_class, (10, 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-    # save image to static folder
-    #cv2.imwrite(os.path.join('static', filename), img)
     
 app.run()
